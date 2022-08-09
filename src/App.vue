@@ -14,15 +14,17 @@ export default {
 
 <style>
 body {
-  background-color: #fff;
+  background-color: #ffffff;
 }
 #app {
-  align-items: center;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 }
 .container {
+  justify-content: center;
+  display: flex;
   width: 1240px;
-  height: 100vh;
+  height: 100%;
 }
 </style>
