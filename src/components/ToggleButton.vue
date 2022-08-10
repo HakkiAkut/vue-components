@@ -53,7 +53,7 @@ $secondColor: white;
   height: $height;
   padding-left: $padding;
   background-color: $firstColor;
-  width: $width;
+  width: $width !important;
   border-radius: $height-slider;
   display: flex;
   align-items: center;

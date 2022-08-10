@@ -14,7 +14,7 @@ export default {
 
 <style>
 body {
-  background-color: #ffffff;
+  background-color: #e5eaf9;
 }
 #app {
   display: flex;
