@@ -16,14 +16,26 @@ export default {
   data: () => ({
     active: false,
     interacted: false,
-    value: false,
   }),
+  props: {
+    value: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    label: {
+      type: String,
+    },
+  },
   methods: {
     changeFilter: function () {
       this.active = !this.active;
       this.interacted = true;
-      this.active = !this.active;
+      this.$emit("input", !this.value);
     },
+  },
+  created() {
+    this.active = this.value;
   },
 };
 </script>
@@ -34,7 +46,7 @@ $width: 60px;
 $height-slider: 22px;
 $padding: calc(($height - $height-slider) / 2);
 $movement: calc($width - $height-slider - $padding);
-$firstColor: black;
+$firstColor: #132b50;
 $secondColor: white;
 
 .btn {
@@ -57,14 +69,12 @@ $secondColor: white;
     animation-duration: 1s;
     @at-root #{&}--true {
       animation-name: changeToTrue;
-
       & .slider {
         background-color: $firstColor;
       }
     }
     @at-root #{&}--false {
       animation-name: changeToFalse;
-
       & .slider {
         background-color: $secondColor;
       }
