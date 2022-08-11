@@ -11,7 +11,7 @@
         at a partner level in the link under each purpose. These choices will be
         signaled to our vendors.
       </p>
-      <button class="btn">Allow all</button>
+      <button class="btn" @click="allowAll">Allow all</button>
     </div>
     <div class="bottom column">
       <p class="content-title">Manage Consent Preferences</p>
@@ -37,11 +37,16 @@
           <p v-if="item.forced" class="pref-text pref-text--activity">
             Always Active
           </p>
-          <toggle-button v-else v-model="item.value" />
+          <toggle-button
+            :ref="item.ref"
+            :id="item.ref"
+            v-else
+            v-model="item.value"
+          />
         </div>
       </div>
       <div class="btn-list row">
-        <button class="btn">Reject all</button>
+        <button class="btn" @click="rejectAll">Reject all</button>
         <button class="btn">Submit my choices</button>
       </div>
     </div>
@@ -55,21 +60,25 @@ export default {
   data: () => ({
     cookies: {
       necessary: {
+        ref: "necessary",
         forced: true,
         value: true,
         title: "Strictly Necessary Cookies",
       },
       functional: {
+        ref: "functional",
         forced: false,
         value: false,
         title: "Functional Cookies",
       },
       performance: {
+        ref: "performance",
         forced: false,
         value: false,
         title: "Performance Cookies",
       },
       personalized: {
+        ref: "personalized",
         forced: false,
         value: false,
         title:
@@ -78,6 +87,22 @@ export default {
     },
   }),
   components: { ToggleButton },
+  methods: {
+    allowAll: function () {
+      for (let [key, value] of Object.entries(this.cookies)) {
+        if (value.forced != true && value.value == false) {
+          document.getElementById(key).click();
+        }
+      }
+    },
+    rejectAll: function () {
+      for (let [key, value] of Object.entries(this.cookies)) {
+        if (value.forced != true && value.value == true) {
+          document.getElementById(key).click();
+        }
+      }
+    },
+  },
 };
 </script>
 
@@ -160,6 +185,7 @@ $dark: #131339;
     width: fit-content;
     @include font(inherit, $white, 14px, 300);
     line-height: 17px;
+    cursor: pointer;
   }
 }
 </style>
