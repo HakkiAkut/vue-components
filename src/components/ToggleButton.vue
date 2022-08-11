@@ -57,6 +57,7 @@ $secondColor: white;
   border-radius: $height-slider;
   display: flex;
   align-items: center;
+  cursor: pointer;
   & .slider {
     height: $height-slider;
     background-color: $secondColor;
