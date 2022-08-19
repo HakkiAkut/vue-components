@@ -43,7 +43,12 @@
       </div>
     </div>
     <div class="coin-list column">
-      <div v-for="coin in coins" :key="coinKey(coin)" class="coin-list__item">
+      <div
+        v-for="coin in coins"
+        :key="coinKey(coin)"
+        class="coin-list__item"
+        @click="selectCoin(coin)"
+      >
         <img class="coin-icon" :src="coin.icon" :alt="coinKey(coin) + 'icon'" />
         <p class="coin-name">{{ coinKey(coin) }}</p>
         <svg
@@ -65,6 +70,7 @@
 </template>
 
 <script>
+import EventBus from "@/services/event_bus.js";
 export default {
   name: "FilterSearchModal",
   data: () => ({
@@ -110,7 +116,11 @@ export default {
       localStorage.setItem("coin_fav", JSON.stringify(fav));
       this.$emit("changeFilter");
     },
+    selectCoin: function (coin) {
+      EventBus.$emit("select_coin", this.coinKey(coin));
+    },
   },
+
   created() {
     localStorage.removeItem("coin_search");
   },
@@ -132,6 +142,7 @@ $dark: #2c3e50;
 $dark-200: #0f1b4a;
 $blue: #4a6fff;
 .modal {
+  position: relative;
   width: $width;
   height: $height;
   padding: 48px 32px 40px;
@@ -139,6 +150,17 @@ $blue: #4a6fff;
   box-shadow: 0px 13px 30px rgba(175, 187, 234, 0.4);
   border-radius: 24px;
   gap: 36px;
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: #ccd5f9;
+    left: -24px;
+    top: -24px;
+    width: 420px;
+    height: 735px;
+    border-radius: 24px;
+    z-index: -1;
+  }
   .svg-heart {
     height: 20px;
     width: 20px;
@@ -222,11 +244,17 @@ $blue: #4a6fff;
       height: 82px;
       @include flex(row, center, none);
       gap: 8px;
+      border-radius: 4px;
       img {
         height: 100%;
       }
       .coin-name {
+        @include font($roboto, $dark-200, 16px);
         flex: 1;
+      }
+      &:hover {
+        background-color: $grey-light;
+        cursor: pointer;
       }
     }
   }

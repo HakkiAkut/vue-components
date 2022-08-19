@@ -13,6 +13,7 @@ import EnterPassword from "@/components/EnterPassword.vue";
 import CookiePreferencesModal from "@/components/CookiePreferencesModal.vue";
 import FilterSearchModal from "@/components/FilterSearchModal.vue";
 import { mapActions, mapGetters } from "vuex";
+import EventBus from "@/services/event_bus.js";
 export default {
   name: "HomeView",
   components: {
@@ -52,6 +53,11 @@ export default {
   },
   computed: {
     ...mapGetters(["getCoins"]),
+  },
+  mounted() {
+    EventBus.$on("select_coin", (data) => {
+      alert(data);
+    });
   },
   created() {
     this.fetchCoins();
