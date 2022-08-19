@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <filter-search-modal :coins="coins" v-on:changeFilter="filteredCoins()" />
+    <filter-search-modal :coins="coins" />
     <cookie-preferences-modal />
     <enter-password />
     <add-item-modal />
@@ -57,6 +57,9 @@ export default {
   mounted() {
     EventBus.$on("select_coin", (data) => {
       alert(data);
+    });
+    EventBus.$on("changeFilter", () => {
+      this.filteredCoins();
     });
   },
   created() {

@@ -47,7 +47,7 @@
         v-for="coin in coins"
         :key="coinKey(coin)"
         class="coin-list__item"
-        @click="selectCoin(coin)"
+        @click.self="selectCoin(coin)"
       >
         <img class="coin-icon" :src="coin.icon" :alt="coinKey(coin) + 'icon'" />
         <p class="coin-name">{{ coinKey(coin) }}</p>
@@ -87,14 +87,14 @@ export default {
     search() {
       this.search = this.search.toUpperCase();
       localStorage.setItem("coin_search", this.search);
-      this.$emit("changeFilter");
+      EventBus.$emit("changeFilter");
     },
   },
   methods: {
     changeCategory: function (category) {
       this.selected = category;
       localStorage.setItem("coin_trade_type", category);
-      this.$emit("changeFilter");
+      EventBus.$emit("changeFilter");
     },
     coinKey: function (coin) {
       return coin.tag + "/" + coin.trade;
@@ -114,7 +114,7 @@ export default {
         fav.push(this.coinKey(coin));
       }
       localStorage.setItem("coin_fav", JSON.stringify(fav));
-      this.$emit("changeFilter");
+      EventBus.$emit("changeFilter");
     },
     selectCoin: function (coin) {
       EventBus.$emit("select_coin", this.coinKey(coin));
