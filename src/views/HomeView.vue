@@ -13,7 +13,7 @@ import EnterPassword from "@/components/EnterPassword.vue";
 import CookiePreferencesModal from "@/components/CookiePreferencesModal.vue";
 import FilterSearchModal from "@/components/FilterSearchModal.vue";
 import { mapActions, mapGetters } from "vuex";
-import EventBus from "@/services/event_bus.js";
+import eventBus from "@/services/event-bus.js";
 export default {
   name: "HomeView",
   components: {
@@ -29,7 +29,7 @@ export default {
   methods: {
     ...mapActions(["fetchCoins"]),
     filteredCoins: function () {
-      this.coins = this.getCoins.filter(this.filterByType);
+      this.coins = this.getCoins.filter(this.filterByType); // type
       this.coins = this.coins.filter(this.filterBySearch);
     },
     filterByType: function (obj) {
@@ -55,10 +55,10 @@ export default {
     ...mapGetters(["getCoins"]),
   },
   mounted() {
-    EventBus.$on("select_coin", (data) => {
+    eventBus.$on("select_coin", (data) => {
       alert(data);
     });
-    EventBus.$on("changeFilter", () => {
+    eventBus.$on("change_filter", () => {
       this.filteredCoins();
     });
   },

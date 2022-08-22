@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import EventBus from "@/services/event_bus.js";
+import eventBus from "@/services/event-bus.js";
 export default {
   name: "FilterSearchModal",
   data: () => ({
@@ -87,14 +87,14 @@ export default {
     search() {
       this.search = this.search.toUpperCase();
       localStorage.setItem("coin_search", this.search);
-      EventBus.$emit("changeFilter");
+      eventBus.$emit("change_filter");
     },
   },
   methods: {
     changeCategory: function (category) {
       this.selected = category;
       localStorage.setItem("coin_trade_type", category);
-      EventBus.$emit("changeFilter");
+      eventBus.$emit("change_filter");
     },
     coinKey: function (coin) {
       return coin.tag + "/" + coin.trade;
@@ -114,10 +114,10 @@ export default {
         fav.push(this.coinKey(coin));
       }
       localStorage.setItem("coin_fav", JSON.stringify(fav));
-      EventBus.$emit("changeFilter");
+      eventBus.$emit("change_filter");
     },
     selectCoin: function (coin) {
-      EventBus.$emit("select_coin", this.coinKey(coin));
+      eventBus.$emit("select_coin", this.coinKey(coin));
     },
   },
 
