@@ -1,5 +1,5 @@
 <template>
-  <div class="panel column">
+  <div class="o-panel column">
     <div class="m-panel-desc column">
       <p class="m-panel-desc__item -title">Already Working Together?</p>
       <p class="m-panel-desc__item">
@@ -22,7 +22,6 @@
         :url="item.picture"
         :key="item.email"
       />
-      <!-- <div class="tooltip">{{ item.name }}</div> -->
     </div>
   </div>
 </template>
@@ -60,7 +59,7 @@ $background: #dde5f9;
 $linear-1: #173ab7;
 $linear-2: #5271e0;
 $background-input: rgba(243, 248, 254, 0.4);
-.panel {
+.o-panel {
   align-items: center;
   position: relative;
   width: $width;

@@ -1,7 +1,5 @@
 <template>
-  <div class="avatar">
-    <img class="avatar-img" :class="size" :src="url" alt="user image" />
-  </div>
+  <img class="a-avatar" :class="size" :src="url" alt="user image" />
 </template>
 
 <script>
@@ -29,19 +27,15 @@ export default {
 
 <style lang="scss" scoped>
 $white: #fff;
-.avatar {
-  position: relative;
-
-  &-img {
-    object-fit: cover;
-    border-radius: 50%;
-    background-color: $white;
-    border: 2px solid $white;
-    padding: 4px;
-    &.medium {
-      width: 95px;
-      height: 95px;
-    }
+.a-avatar {
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: $white;
+  border: 2px solid $white;
+  padding: 4px;
+  &.medium {
+    width: 95px;
+    height: 95px;
   }
 }
 </style>
