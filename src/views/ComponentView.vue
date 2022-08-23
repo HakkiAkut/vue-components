@@ -8,14 +8,12 @@
     >
       <polyline points="15 18 9 12 15 6"></polyline>
     </svg>
-    <CustomAlert v-if="this.$route.params.id == 5" type="error" />
-    <add-item-modal v-else-if="this.$route.params.id == 4" />
-    <enter-password v-else-if="this.$route.params.id == 3" />
+    <filter-search-modal v-if="this.$route.params.id == 1" :coins="coins" />
     <cookie-preferences-modal v-else-if="this.$route.params.id == 2" />
-    <filter-search-modal
-      :coins="coins"
-      v-else-if="this.$route.params.id == 1"
-    />
+    <enter-password v-else-if="this.$route.params.id == 3" />
+    <add-item-modal v-else-if="this.$route.params.id == 4" />
+    <custom-alert v-else-if="this.$route.params.id == 5" type="error" />
+    <add-user-card v-else-if="this.$route.params.id == 6" :users="getUsers" />
     <svg
       class="svg-direction"
       :class="{
@@ -34,9 +32,11 @@ import AddItemModal from "@/components/AddItemModal.vue";
 import EnterPassword from "@/components/EnterPassword.vue";
 import CookiePreferencesModal from "@/components/CookiePreferencesModal.vue";
 import FilterSearchModal from "@/components/FilterSearchModal.vue";
-import { mapActions, mapGetters } from "vuex";
 import eventBus from "@/services/event-bus.js";
 import CustomAlert from "@/components/CustomAlert.vue";
+import AddUserCard from "@/components/AddUserCard.vue";
+
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "ComponentView",
   components: {
@@ -45,13 +45,15 @@ export default {
     CookiePreferencesModal,
     FilterSearchModal,
     CustomAlert,
+    AddUserCard,
   },
   data: () => ({
     coins: [],
-    lastId: 5,
+    lastId: 6,
   }),
 
   methods: {
+    ...mapActions(["fetchCoins", "fetchUser"]),
     changeComponent: function (direction) {
       let id = parseInt(this.$route.params.id);
       if (id + direction >= 1 && id + direction <= this.lastId) {
@@ -63,7 +65,6 @@ export default {
     },
 
     // *** START of FilterSearchModal *** note: tried to use EventBus and Local Storage
-    ...mapActions(["fetchCoins"]),
 
     filteredCoins: function () {
       this.coins = this.getCoins.filter(this.filterByType); // type
@@ -90,7 +91,7 @@ export default {
     // *** End of FilterSearchModal ***
   },
   computed: {
-    ...mapGetters(["getCoins"]),
+    ...mapGetters(["getCoins", "getUsers"]),
   },
   mounted() {
     eventBus.$on("select_coin", (data) => {
@@ -98,6 +99,9 @@ export default {
     });
     eventBus.$on("change_filter", () => {
       this.filteredCoins();
+    });
+    eventBus.$on("add-user-card", (data) => {
+      this.fetchUser(data);
     });
   },
   created() {
