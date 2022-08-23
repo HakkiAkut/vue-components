@@ -1,8 +1,12 @@
 <template>
-  <div class="alert" :class="{ 'alert--error': type == 'error' }">
+  <div
+    class="alert"
+    v-if="value.show"
+    :class="{ 'alert--error': value.type == 'error' }"
+  >
     <div class="column">
-      <p class="alert-title -yellow">Oops, an error occurred! {{ type }}</p>
-      <p class="alert-desc">Apologies for inconvenience</p>
+      <p class="alert-title -yellow">{{ value.title }}</p>
+      <p class="alert-desc">{{ value.desc }}</p>
     </div>
   </div>
 </template>
@@ -11,9 +15,52 @@
 export default {
   name: "CustomAlert",
   props: {
-    type: {
-      type: String, // can be success or error
-      default: "error",
+    value: {
+      type: Object,
+      default: () => ({
+        show: false,
+        title: "",
+        desc: "",
+        duration: 1,
+        type: "success",
+      }),
+      required: true,
+    },
+  },
+  methods: {
+    checkError: function () {
+      if (
+        this.value.show == null ||
+        this.value.title == null ||
+        this.value.desc == null ||
+        this.value.duration == null ||
+        this.value.type == null
+      ) {
+        this.changeToDefault();
+        throw new Error(
+          "Some values are missing. CustomAlert requires {show: Boolean, title: String, desc: String, duration: Number, type: (success or error) }"
+        );
+      } else if (this.value.type != "success" && this.value.type != "error") {
+        this.changeToDefault();
+        throw new Error("invalid type. type can only be success or error }");
+      }
+    },
+    changeToDefault: function () {
+      this.$emit("input", {
+        show: false,
+        title: "",
+        desc: "",
+        duration: 1,
+        type: "success",
+      });
+    },
+  },
+  watch: {
+    value() {
+      this.checkError();
+      setTimeout(() => {
+        this.changeToDefault();
+      }, this.value.duration * 1000);
     },
   },
 };
@@ -22,7 +69,7 @@ export default {
 <style lang="scss" scoped>
 // size
 $width: 450px;
-$height: 170px;
+$height: 130px;
 $p-15: 15px;
 
 // colors
@@ -32,7 +79,7 @@ $success: #edf9f0;
 $warning: #fff4ec;
 $info: #eef2fa;
 .alert {
-  position: relative;
+  position: absolute;
   box-shadow: 20px 34px 74px rgba(21, 21, 106, 0.07);
   @include flex(row, center, none);
   width: $width;
@@ -42,6 +89,9 @@ $info: #eef2fa;
   border-radius: 15px;
   overflow: hidden;
   gap: 15px;
+  z-index: 5;
+  right: 10px;
+  top: 10px;
 
   &-title {
     @include font("roboto", #000, 20px, 600);

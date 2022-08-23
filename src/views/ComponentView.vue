@@ -37,6 +37,7 @@ import CustomAlert from "@/components/CustomAlert.vue";
 import AddUserCard from "@/components/AddUserCard.vue";
 
 import { mapActions, mapGetters } from "vuex";
+import EventBus from "@/services/event-bus.js";
 export default {
   name: "ComponentView",
   components: {
@@ -101,7 +102,14 @@ export default {
       this.filteredCoins();
     });
     eventBus.$on("add-user-card", (data) => {
-      this.fetchUser(data);
+      this.fetchUser(data).then((user) => {
+        EventBus.$emit("custom-alert", {
+          type: "success",
+          title: "New User Added!",
+          desc: `${user.name} added on friend list`,
+          duration: 3,
+        });
+      });
     });
   },
   created() {
