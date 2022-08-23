@@ -15,13 +15,14 @@
       </svg>
     </div>
     <div class="m-panel-users row">
-      <circle-user-avatar
-        size="medium"
+      <div
         class="m-panel-users__item"
         v-for="item in users"
-        :url="item.picture"
+        :name="item.name"
         :key="item.email"
-      />
+      >
+        <circle-user-avatar size="medium" :url="item.picture" />
+      </div>
     </div>
   </div>
 </template>
@@ -141,16 +142,15 @@ $background-input: rgba(243, 248, 254, 0.4);
       height: fit-content;
       border-radius: 50%;
       box-shadow: 0px 14px 25px -15px rgba(82, 113, 224, 0.5);
-      .tooltip {
+      &:hover:after {
+        content: attr(name);
         position: absolute;
-        visibility: hidden;
-        background-color: white;
-        box-shadow: 0px 14px 25px -15px rgba(82, 113, 224, 0.5);
-        z-index: 5;
-      }
-
-      &:hover .tooltip {
-        visibility: visible;
+        bottom: 1px;
+        @include font($mulish, $black, 16px);
+        padding: 10px;
+        background: $white;
+        z-index: 1;
+        border-radius: 5px;
       }
     }
   }

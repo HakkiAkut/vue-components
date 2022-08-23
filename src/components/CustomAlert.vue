@@ -89,7 +89,7 @@ $info: #eef2fa;
   border-radius: 15px;
   overflow: hidden;
   gap: 15px;
-  z-index: 5;
+  z-index: 9999;
   right: 10px;
   top: 10px;
 
