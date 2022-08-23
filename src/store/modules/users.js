@@ -11,20 +11,20 @@ const mutations = {
   },
 };
 const actions = {
-  fetchUser: async ({ commit }, email) => {
+  fetchUser: ({ commit }, email) => {
     const client = axios.create({
       baseURL: process.env.VUE_APP_RANDOM_USER_API_URL,
     });
-    const response = await client.get("");
 
-    let user = {
-      email: email,
-      name:
-        response.data.results[0].name.first +
-        response.data.results[0].name.last,
-      picture: response.data.results[0].picture.medium,
-    };
-    commit("setUsers", user);
+    return client.get("").then((response) => {
+      let user = {
+        email: email,
+        name: `${response.data.results[0].name.first} ${response.data.results[0].name.last}`,
+        picture: response.data.results[0].picture.medium,
+      };
+      commit("setUsers", user);
+      return user;
+    });
   },
 };
 
