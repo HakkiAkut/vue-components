@@ -8,10 +8,14 @@
     >
       <polyline points="15 18 9 12 15 6"></polyline>
     </svg>
-    <filter-search-modal :coins="coins" v-if="this.$route.params.id == 1" />
-    <cookie-preferences-modal v-else-if="this.$route.params.id == 2" />
-    <enter-password v-else-if="this.$route.params.id == 3" />
+    <CustomAlert v-if="this.$route.params.id == 5" type="error" />
     <add-item-modal v-else-if="this.$route.params.id == 4" />
+    <enter-password v-else-if="this.$route.params.id == 3" />
+    <cookie-preferences-modal v-else-if="this.$route.params.id == 2" />
+    <filter-search-modal
+      :coins="coins"
+      v-else-if="this.$route.params.id == 1"
+    />
     <svg
       class="svg-direction"
       :class="{
@@ -32,6 +36,7 @@ import CookiePreferencesModal from "@/components/CookiePreferencesModal.vue";
 import FilterSearchModal from "@/components/FilterSearchModal.vue";
 import { mapActions, mapGetters } from "vuex";
 import eventBus from "@/services/event-bus.js";
+import CustomAlert from "@/components/CustomAlert.vue";
 export default {
   name: "ComponentView",
   components: {
@@ -39,10 +44,11 @@ export default {
     EnterPassword,
     CookiePreferencesModal,
     FilterSearchModal,
+    CustomAlert,
   },
   data: () => ({
     coins: [],
-    lastId: 4,
+    lastId: 5,
   }),
 
   methods: {
