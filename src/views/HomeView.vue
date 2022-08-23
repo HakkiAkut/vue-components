@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <button @click="goToComponentView">Components</button>
     <filter-search-modal :coins="coins" />
     <cookie-preferences-modal />
     <enter-password />
@@ -27,6 +28,9 @@ export default {
   }),
 
   methods: {
+    goToComponentView: function () {
+      this.$router.push({ name: "ComponentView", params: { id: 1 } });
+    },
     ...mapActions(["fetchCoins"]),
     filteredCoins: function () {
       this.coins = this.getCoins.filter(this.filterByType); // type
