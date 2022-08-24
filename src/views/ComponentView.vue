@@ -12,7 +12,7 @@
     <cookie-preferences-modal v-else-if="this.$route.params.id == 2" />
     <enter-password v-else-if="this.$route.params.id == 3" />
     <add-item-modal v-else-if="this.$route.params.id == 4" />
-    <custom-alert v-else-if="this.$route.params.id == 5" type="error" />
+    <custom-alert-usage v-else-if="this.$route.params.id == 5" />
     <add-user-card v-else-if="this.$route.params.id == 6" :users="getUsers" />
     <svg
       class="svg-direction"
@@ -33,7 +33,7 @@ import EnterPassword from "@/components/organisms/EnterPassword.vue";
 import CookiePreferencesModal from "@/components/organisms/CookiePreferencesModal.vue";
 import FilterSearchModal from "@/components/organisms/FilterSearchModal.vue";
 import eventBus from "@/services/event-bus.js";
-import CustomAlert from "@/components/molecules/CustomAlert.vue";
+import CustomAlertUsage from "@/components/usage/CustomAlertUsage.vue";
 import AddUserCard from "@/components/organisms/AddUserCard.vue";
 
 import { mapActions, mapGetters } from "vuex";
@@ -45,7 +45,7 @@ export default {
     EnterPassword,
     CookiePreferencesModal,
     FilterSearchModal,
-    CustomAlert,
+    CustomAlertUsage,
     AddUserCard,
   },
   data: () => ({
