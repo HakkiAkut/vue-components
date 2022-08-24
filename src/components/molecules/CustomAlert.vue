@@ -106,11 +106,11 @@ $info: #eef2fa;
   top: 10px;
 
   &-title {
-    @include font("roboto", #000, 20px, 600);
+    @include font($arial, #000, 20px, 600);
   }
 
   &-desc {
-    @include font("roboto", #000, 18px, 400);
+    @include font($arial, #000, 18px);
   }
 
   .column {
