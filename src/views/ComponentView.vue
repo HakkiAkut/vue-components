@@ -125,7 +125,8 @@ $color-direction-svg: #918787;
 
 .container {
   @include flex(row, center, space-between);
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   width: 100%;
 
   .svg-direction {
