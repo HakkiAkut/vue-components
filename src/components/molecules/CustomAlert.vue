@@ -10,6 +10,9 @@
 <script>
 export default {
   name: "CustomAlert",
+  data: () => ({
+    duration: null,
+  }),
   props: {
     value: {
       type: Object,
@@ -66,7 +69,8 @@ export default {
   watch: {
     value() {
       this.checkError();
-      setTimeout(() => {
+      clearTimeout(this.duration);
+      this.duration = setTimeout(() => {
         this.changeToDefault();
       }, this.value.duration * 1000);
     },
