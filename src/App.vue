@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import CustomAlert from "./components/CustomAlert.vue";
+import CustomAlert from "@/components/molecules/CustomAlert.vue";
 import EventBus from "@/services/event-bus";
 export default {
   name: "App",

@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import ToggleButton from "./ToggleButton.vue";
+import ToggleButton from "@/components/atoms/ToggleButton.vue";
 export default {
   name: "CookiePreferencesModal",
   data: () => ({

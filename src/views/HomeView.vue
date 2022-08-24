@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import AddItemModal from "@/components/AddItemModal.vue";
-import EnterPassword from "@/components/EnterPassword.vue";
-import CookiePreferencesModal from "@/components/CookiePreferencesModal.vue";
-import FilterSearchModal from "@/components/FilterSearchModal.vue";
+import AddItemModal from "@/components/organisms/AddItemModal.vue";
+import EnterPassword from "@/components/organisms/EnterPassword.vue";
+import CookiePreferencesModal from "@/components/organisms/CookiePreferencesModal.vue";
+import FilterSearchModal from "@/components/organisms/FilterSearchModal.vue";
 import { mapActions, mapGetters } from "vuex";
 import eventBus from "@/services/event-bus.js";
 export default {

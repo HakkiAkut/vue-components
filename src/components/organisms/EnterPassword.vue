@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import ToggleButton from "@/components/ToggleButton.vue";
+import ToggleButton from "@/components/atoms/ToggleButton.vue";
 export default {
   name: "EnterPassword",
   components: {

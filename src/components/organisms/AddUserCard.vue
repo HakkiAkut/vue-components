@@ -29,7 +29,7 @@
 
 <script>
 import EventBus from "@/services/event-bus";
-import CircleUserAvatar from "./CircleUserAvatar.vue";
+import CircleUserAvatar from "@/components/atoms/CircleUserAvatar.vue";
 export default {
   name: "AddUserCard",
   data: () => ({
