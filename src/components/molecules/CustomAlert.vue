@@ -1,7 +1,7 @@
 <template>
   <div class="alert" v-if="value.show" :class="type">
     <div class="column">
-      <p class="alert-title -yellow">{{ value.title }}</p>
+      <p class="alert-title">{{ value.title }}</p>
       <p class="alert-desc">{{ value.desc }}</p>
     </div>
   </div>
