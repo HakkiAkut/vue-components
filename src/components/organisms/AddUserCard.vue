@@ -3,7 +3,7 @@
     <div class="m-panel-desc column">
       <p class="m-panel-desc__item -title">Already Working Together?</p>
       <p class="m-panel-desc__item">
-        Log in to your account and connect with<br />
+        Add their accounts and connect with<br />
         your teammates
       </p>
     </div>
