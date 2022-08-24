@@ -8,12 +8,12 @@
     >
       <polyline points="15 18 9 12 15 6"></polyline>
     </svg>
-    <filter-search-modal v-if="this.$route.params.id == 1" :coins="coins" />
-    <cookie-preferences-modal v-else-if="this.$route.params.id == 2" />
-    <enter-password v-else-if="this.$route.params.id == 3" />
-    <add-item-modal v-else-if="this.$route.params.id == 4" />
-    <custom-alert-usage v-else-if="this.$route.params.id == 5" />
-    <add-user-card v-else-if="this.$route.params.id == 6" :users="getUsers" />
+    <add-item-modal v-if="componentId == 1" />
+    <enter-password v-else-if="componentId == 2" />
+    <cookie-preferences-modal v-else-if="componentId == 3" />
+    <filter-search-modal v-else-if="componentId == 4" :coins="coins" />
+    <custom-alert-usage v-else-if="componentId == 5" />
+    <add-user-card v-else-if="componentId == 6" :users="getUsers" />
     <svg
       class="svg-direction"
       :class="{
@@ -93,6 +93,9 @@ export default {
   },
   computed: {
     ...mapGetters(["getCoins", "getUsers"]),
+    componentId: function () {
+      return this.$route.params.id;
+    },
   },
   mounted() {
     eventBus.$on("select_coin", (data) => {
