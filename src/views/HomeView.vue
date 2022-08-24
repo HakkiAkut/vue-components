@@ -67,6 +67,7 @@ export default {
     });
   },
   created() {
+    this.$router.push({ name: "ComponentView", params: { id: 1 } });
     this.fetchCoins();
     this.coins = this.getCoins;
   },
