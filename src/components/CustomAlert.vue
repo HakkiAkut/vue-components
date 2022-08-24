@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="alert"
-    v-if="value.show"
-    :class="{ 'alert--error': value.type == 'error' }"
-  >
+  <div class="alert" v-if="value.show" :class="type">
     <div class="column">
       <p class="alert-title -yellow">{{ value.title }}</p>
       <p class="alert-desc">{{ value.desc }}</p>
@@ -27,6 +23,11 @@ export default {
       required: true,
     },
   },
+  computed: {
+    type: function () {
+      return `alert--${this.value.type}`;
+    },
+  },
   methods: {
     checkError: function () {
       if (
@@ -38,11 +39,18 @@ export default {
       ) {
         this.changeToDefault();
         throw new Error(
-          "Some values are missing. CustomAlert requires {show: Boolean, title: String, desc: String, duration: Number, type: (success or error) }"
+          "Some values are missing. CustomAlert requires {show: Boolean, title: String, desc: String, duration: Number, type: (success or error or warning or information) }"
         );
-      } else if (this.value.type != "success" && this.value.type != "error") {
+      } else if (
+        this.value.type != "success" &&
+        this.value.type != "error" &&
+        this.value.type != "warning" &&
+        this.value.type != "information"
+      ) {
         this.changeToDefault();
-        throw new Error("invalid type. type can only be success or error }");
+        throw new Error(
+          "invalid type. type can only be {success or error or warning or information}"
+        );
       }
     },
     changeToDefault: function () {
@@ -113,11 +121,17 @@ $info: #eef2fa;
     border-bottom-right-radius: 50%;
     border-top-right-radius: 50%;
   }
-  &#{&}--error {
-    &::before {
-      background-color: $error;
-      content: url("@/assets/icons/unchecked.svg");
-    }
+  &#{&}--error::before {
+    background-color: $error;
+    content: url("@/assets/icons/unchecked.svg");
+  }
+  &#{&}--warning::before {
+    background-color: $warning;
+    content: url("@/assets/icons/warning.svg");
+  }
+  &#{&}--information::before {
+    background-color: $info;
+    content: url("@/assets/icons/information.svg");
   }
 }
 </style>
