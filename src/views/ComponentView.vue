@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <image-links class="a-link-list" :links="getLinks[componentId - 1]" />
     <svg
       class="svg-direction"
       :class="{ 'svg-direction--available': this.$route.params.id != '1' }"
@@ -38,6 +39,7 @@ import AddUserCard from "@/components/organisms/AddUserCard.vue";
 
 import { mapActions, mapGetters } from "vuex";
 import EventBus from "@/services/event-bus.js";
+import ImageLinks from "@/components/molecules/ImageLinks.vue";
 export default {
   name: "ComponentView",
   components: {
@@ -47,6 +49,7 @@ export default {
     FilterSearchModal,
     CustomAlertUsage,
     AddUserCard,
+    ImageLinks,
   },
   data: () => ({
     coins: [],
@@ -92,7 +95,7 @@ export default {
     // *** End of FilterSearchModal ***
   },
   computed: {
-    ...mapGetters(["getCoins", "getUsers"]),
+    ...mapGetters(["getCoins", "getUsers", "getLinks"]),
     componentId: function () {
       return this.$route.params.id;
     },
@@ -128,6 +131,7 @@ $color-direction-svg: #918787;
 
 .container {
   @include flex(row, center, space-between);
+  position: relative;
   min-height: 100vh;
   height: 100%;
   width: 100%;
@@ -150,6 +154,13 @@ $color-direction-svg: #918787;
         opacity: 1;
       }
     }
+  }
+
+  .a-link-list {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    z-index: 1;
   }
 }
 </style>
