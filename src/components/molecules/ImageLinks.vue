@@ -53,7 +53,7 @@
         />
       </svg>
     </a>
-    <div class="m-link-list__item -non-link -info" :desc="links.information">
+    <div class="m-link-list__item -non-link" :desc="links.information">
       <svg viewBox="0 0 460 460">
         <path
           d="M230,0C102.975,0,0,102.975,0,230s102.975,230,230,230s230-102.974,230-230S357.025,0,230,0z M268.333,377.36
