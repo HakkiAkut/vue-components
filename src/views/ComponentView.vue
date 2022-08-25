@@ -160,7 +160,6 @@ $color-direction-svg: #918787;
     position: absolute;
     top: 10px;
     right: 30px;
-    z-index: 1;
   }
 }
 </style>
