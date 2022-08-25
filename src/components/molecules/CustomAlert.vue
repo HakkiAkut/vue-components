@@ -22,13 +22,16 @@ export default {
         desc: "",
         duration: 1,
         type: "success",
+        position: "right-top",
       }),
       required: true,
     },
   },
   computed: {
     type: function () {
-      return `alert--${this.value.type}`;
+      return `alert--${this.value.type} alert--${
+        this.value.position ?? "right-top"
+      }`;
     },
   },
   methods: {
@@ -63,6 +66,7 @@ export default {
         desc: "",
         duration: 1,
         type: "success",
+        position: "right-top",
       });
     },
   },
@@ -91,7 +95,7 @@ $success: #edf9f0;
 $warning: #fff4ec;
 $info: #eef2fa;
 .alert {
-  position: absolute;
+  position: fixed;
   box-shadow: 20px 34px 74px rgba(21, 21, 106, 0.07);
   @include flex(row, center, none);
   width: $width;
@@ -102,8 +106,40 @@ $info: #eef2fa;
   overflow: hidden;
   gap: 15px;
   z-index: 9999;
-  right: 10px;
-  top: 10px;
+
+  &#{&}--right-top {
+    right: 10px;
+    top: 10px;
+  }
+  &#{&}--right-center {
+    right: 10px;
+    top: calc(50vh - ($height/2));
+  }
+  &#{&}--right-bottom {
+    right: 10px;
+    bottom: 10px;
+  }
+  &#{&}--left-top {
+    left: 10px;
+    top: 10px;
+  }
+  &#{&}--left-center {
+    left: 10px;
+    top: calc(50vh - ($height/2));
+  }
+  &#{&}--left-bottom {
+    left: 10px;
+    bottom: 10px;
+  }
+  &#{&}--center-top {
+    top: 10px;
+  }
+  &#{&}--center {
+    top: calc(50vh - ($height/2));
+  }
+  &#{&}--center-bottom {
+    bottom: 10px;
+  }
 
   &-title {
     @include font($arial, #000, 20px, 600);
