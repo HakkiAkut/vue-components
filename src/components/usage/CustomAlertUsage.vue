@@ -1,6 +1,18 @@
 <template>
   <div class="o-wrapper">
     <h2 class="a-title">Click Buttons to see Alerts</h2>
+    <div class="m-position">
+      <label for="select-pos">Select a position</label>
+      <select
+        class="m-position-select column"
+        name="select-pos"
+        v-model="selectedPosition"
+      >
+        <option v-for="item in positions" :key="item">
+          {{ item }}
+        </option>
+      </select>
+    </div>
     <div class="m-alert-list">
       <button
         class="m-alert-list__item"
@@ -20,6 +32,18 @@ import EventBus from "@/services/event-bus.js";
 export default {
   name: "CustomAlertUsage",
   data: () => ({
+    selectedPosition: "Right Top",
+    positions: [
+      "right-top",
+      "right-center",
+      "right-bottom",
+      "left-top",
+      "left-center",
+      "left-bottom",
+      "center-top",
+      "center",
+      "center-bottom",
+    ],
     buttons: [
       {
         name: "success",
@@ -50,6 +74,7 @@ export default {
         title: item.title,
         desc: item.desc,
         duration: 2,
+        position: this.selectedPosition,
       });
     },
   },
@@ -60,6 +85,7 @@ export default {
 // colors
 $white: #fff;
 $black: #000;
+$grey: #807c7c;
 
 $error: #feefef;
 $success: #edf9f0;
@@ -106,6 +132,18 @@ $info-dark: #3d66b8;
         border: 1px solid $info-dark;
         color: $info-dark;
       }
+    }
+  }
+
+  .m-position {
+    @include flex(column, center, center);
+    gap: 10px;
+    &-select {
+      width: 300px;
+      padding: 10px;
+      border: 1px solid $grey;
+      border-radius: 5px;
+      @include font($mulish, $black, 16px);
     }
   }
 }
